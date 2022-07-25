@@ -76,6 +76,7 @@ afterEvaluate {
                 artifactId = "AdMediationLibModule"
                 groupId = "com.github.suhaatechapps"
                 version = "9.1.3.6"
+
             }
         }
     }
