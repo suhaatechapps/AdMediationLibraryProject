@@ -11,8 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.zee.admobmediationlibproject.R
-import com.zee.admobmediationlibproject.databinding.ZnativeAdvancedLayoutBinding
+import com.zee.suhaatecs.R
+import com.zee.suhaatecs.databinding.ZnativeAdvancedLayoutBinding
 
 import com.zee.suhaatecs.mediation.hDp
 

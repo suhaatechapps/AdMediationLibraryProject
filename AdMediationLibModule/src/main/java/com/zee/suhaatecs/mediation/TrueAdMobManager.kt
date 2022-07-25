@@ -19,8 +19,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
-import com.zee.admobmediationlibproject.R
-import com.zee.admobmediationlibproject.databinding.*
+import com.zee.suhaatecs.R
+import com.zee.suhaatecs.databinding.*
+
 import com.zee.suhaatecs.mediation.adlimits.TrueAdLimitUtils
 import com.zee.suhaatecs.mediation.adlimits.TruePrefUtils
 import com.zee.suhaatecs.mediation.interfaces.TrueAdCallBackInterface
@@ -778,7 +779,6 @@ class TrueAdMobManager(
                     if (!TrueAdLimitUtils.isBanned(context, prefName, "Banner Ad")) {
                         Handler(Looper.getMainLooper()).postDelayed(
                             {
-
                                 zBannerAdView!!.loadAd(adRequest)
                             },
                             TruePrefUtils.getInstance().init(context, prefName).delayMs

@@ -97,7 +97,7 @@ object TrueAdManager : TrueAdCallBackInterface {
     fun zShowInterstitial(
         activity: Activity,
         interNewAdID: String,
-        priority: TrueAdCallBackInterface = zInterstitialPriorityType
+        priority: TrueAdPriorityType = zInterstitialPriorityType
     ) {
         if (TrueConstants.isNetworkSpeedHigh()) {
             when (priority) {

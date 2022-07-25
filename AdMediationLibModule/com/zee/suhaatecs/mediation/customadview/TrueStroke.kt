@@ -2,7 +2,7 @@ package com.zee.suhaatecs.mediation.customadview
 
 import android.content.Context
 import androidx.core.content.ContextCompat
-import com.zee.admobmediationlibproject.R
+import com.zee.suhaatecs.R
 
 import com.zee.suhaatecs.mediation.hDp
 

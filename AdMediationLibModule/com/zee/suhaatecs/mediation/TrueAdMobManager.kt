@@ -1,4 +1,4 @@
-package com.zee.suhaatecs.mediation
+package com.zee.suhaatecs
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -19,10 +19,10 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
-import com.zee.admobmediationlibproject.R
-import com.zee.admobmediationlibproject.databinding.*
-import com.zee.suhaatecs.mediation.adlimits.TrueAdLimitUtils
-import com.zee.suhaatecs.mediation.adlimits.TruePrefUtils
+import com.zee.suhaatecs.R
+import com.zee.suhaatecs.databinding.*
+import com.zee.suhaatecs.adlimits.TrueAdLimitUtils
+import com.zee.suhaatecs.adlimits.TruePrefUtils
 import com.zee.suhaatecs.mediation.interfaces.TrueAdCallBackInterface
 import com.zee.suhaatecs.mediation.TrueAdsCalBackObject.interstitialAdnValue
 import com.zee.suhaatecs.mediation.callbacks.TrueAdCallbacks

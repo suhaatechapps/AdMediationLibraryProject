@@ -2,7 +2,7 @@ package com.zee.suhaatecs.mediation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.zee.admobmediationlibproject.R
+import com.zee.suhaatecs.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

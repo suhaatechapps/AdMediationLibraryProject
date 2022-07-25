@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import com.zee.admobmediationlibproject.R
-import com.zee.admobmediationlibproject.databinding.ZnativeBannerFlippingLayoutBinding
+import com.zee.suhaatecs.R
+import com.zee.suhaatecs.databinding.ZnativeBannerFlippingLayoutBinding
 import com.zee.suhaatecs.mediation.TrueConstants
 
 import com.zee.suhaatecs.mediation.hDp

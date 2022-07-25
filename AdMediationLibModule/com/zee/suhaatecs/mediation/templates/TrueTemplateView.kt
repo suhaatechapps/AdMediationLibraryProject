@@ -21,7 +21,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.zee.admobmediationlibproject.R
+import com.zee.suhaatecs.R
 import com.zee.suhaatecs.mediation.templates.TrueNativeTemplateStyle
 
 class TrueTemplateView : FrameLayout {

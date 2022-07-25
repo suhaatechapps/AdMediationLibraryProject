@@ -19,13 +19,13 @@ class MainActivity : AppCompatActivity() {
     private var zAdMobManager: TrueAdMobManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-
         zAdMobManager = TrueAdMobManager(this)
         Handler(Looper.getMainLooper()).postDelayed({
             if (TrueConstants.isNetworkAvailable(this) && TrueConstants.isNetworkSpeedHigh()) {
                 binding.splashProgress.visibility = View.GONE
-                TrueAdManager.zShowInterstitial(
+                TrueAdManager.zShowInterstitialWithOutCallBacks(
                     this,
                     "ca-app-pub-3940256099942544/1033173712",
                     object : TrueAdCallBackInterface {
