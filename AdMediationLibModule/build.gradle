@@ -67,6 +67,7 @@ dependencies {
     /**Unit Ads Library*/
     implementation files('/libs/unity-ads.aar')
 
+
     /**AppLovin dependencies*/
     implementation 'com.applovin:applovin-sdk:11.1.2'
 }
