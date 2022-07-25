@@ -1,4 +1,4 @@
-package com.zee.truemuslims.ads.modules.templates
+package com.zee.suhaatecs.mediation.templates
 
 import android.animation.Animator
 import android.animation.AnimatorInflater
@@ -21,8 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.zee.admobmediationlibproject.R
-import com.zee.suhaatecs.mediation.templates.TrueNativeTemplateStyle
+import com.zee.suhaatecs.R
+
 
 class TrueTemplateView : FrameLayout {
     private var templateType = 0

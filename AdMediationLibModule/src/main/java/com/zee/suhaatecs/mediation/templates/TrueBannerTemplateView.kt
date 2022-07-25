@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
-import com.zee.admobmediationlibproject.R
+import com.zee.suhaatecs.R
 
 class TrueBannerTemplateView : FrameLayout {
     private var templateType = 0
