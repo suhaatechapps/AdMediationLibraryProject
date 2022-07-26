@@ -13,6 +13,7 @@ object TrueAdMobFallbackTrueStrategy : TrueStrategy {
             TrueAdPriorityType.Z_AD_MOB -> {
                 when (zAdsType) {
                     TrueAdsType.Z_ADMOB -> TrueAdPriorityType.Z_NONE
+                    else -> TrueAdPriorityType.Z_NONE
                 }
             }
             else -> TrueAdPriorityType.Z_NONE
@@ -27,12 +28,12 @@ object TrueAdMobFallbackTrueStrategy : TrueStrategy {
             TrueAdPriorityType.Z_AD_MOB -> {
                 when (zAdsType) {
                     TrueAdsType.Z_ADMOB -> TrueAdPriorityType.Z_NONE
+                    else -> TrueAdPriorityType.Z_NONE
                 }
             }
             else -> TrueAdPriorityType.Z_NONE
         }
     }
-
 
     override fun zNativeAdvancedStrategy(
         zGlobalPriority: TrueAdPriorityType,
@@ -42,6 +43,7 @@ object TrueAdMobFallbackTrueStrategy : TrueStrategy {
             TrueAdPriorityType.Z_AD_MOB -> {
                 when (zAdsType) {
                     TrueAdsType.Z_ADMOB -> TrueAdPriorityType.Z_NONE
+                    else -> TrueAdPriorityType.Z_NONE
                 }
             }
             else -> TrueAdPriorityType.Z_NONE
@@ -56,6 +58,7 @@ object TrueAdMobFallbackTrueStrategy : TrueStrategy {
             TrueAdPriorityType.Z_AD_MOB -> {
                 when (zAdsType) {
                     TrueAdsType.Z_ADMOB -> TrueAdPriorityType.Z_NONE
+                    else -> TrueAdPriorityType.Z_NONE
                 }
             }
             else -> TrueAdPriorityType.Z_NONE

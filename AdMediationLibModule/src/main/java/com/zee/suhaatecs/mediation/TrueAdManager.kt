@@ -3,8 +3,11 @@ package com.zee.suhaatecs.mediation
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.zee.suhaatecs.facebook.FaceBookAdManager
 import com.zee.suhaatecs.mediation.interfaces.TrueAdCallBackInterface
 import com.zee.suhaatecs.mediation.callbacks.TrueAdCallbacks
 import com.zee.suhaatecs.mediation.callbacks.TrueInterCallbacks
@@ -29,7 +32,7 @@ object TrueAdManager : TrueAdCallBackInterface {
     private var zNativeBannerFlippingPriorityType: TrueAdPriorityType = Z_AD_MOB
     private var zNativeAdvancedPriorityType: TrueAdPriorityType = Z_AD_MOB
     private var zInterstitialPriorityType: TrueAdPriorityType = Z_AD_MOB
-
+    var hFacebookManger: FaceBookAdManager? = null
     private var zTimeOut: Long = TrueConstants.h3SecTimeOut
 
     private var zAdManagerInterCallbacks: TrueInterCallbacks? = null
@@ -43,6 +46,7 @@ object TrueAdManager : TrueAdCallBackInterface {
     ) {
         context = zContext
         zAdMobManager = TrueAdMobManager(context)
+        hFacebookManger = FaceBookAdManager(context)
         TrueAdMobManager(zContext).zSetInterCallbacks(zInterCallbacks)
         TrueAdMobManager(zContext).zSetNativeCallbacks(zAdCallbacks)
     }
@@ -116,6 +120,19 @@ object TrueAdManager : TrueAdCallBackInterface {
         }
     }
 
+    fun zShowFbInterstitial(
+        activity: Activity,
+        adsId: String
+    ) {
+        if (hFacebookManger?.hGetFbInterstitialAd() != null &&
+            hFacebookManger?.hGetFbInterstitialAd()?.isAdLoaded == true
+        ) {
+            hFacebookManger?.hGetFbInterstitialAd()?.show()
+            return
+        } else
+            hFacebookManger?.loadFbInterstitialAds(activity, adsId)
+    }
+
     fun zShowInterstitialWithOutCallBacks(
         activity: Activity,
         interNewAdID: String,
@@ -143,32 +160,52 @@ object TrueAdManager : TrueAdCallBackInterface {
         }
     }
 
-    /*fun hIsInterstitialAvailable(activity: Activity): Boolean {
-        val hPriorityType: TrueAdPriorityType =
-            hInterstitialPriorityType
-        when (hPriorityType) {
-            H_AD_MOB -> {
-                if (hAdMobManager?.hInterstitialAd != null) {
-                    return true
-                } else {
-                    hAdMobManager?.hLoadInterstitialAd(context,
-                        "ca-app-pub-3940256099942544/1033173712")
-                }
-            }
-            H_FACE_BOOK -> {
-
-                if (hFacebookManger?.hGetFbInterstitialAd() != null &&
-                    hFacebookManger!!.hGetFbInterstitialAd()?.isAdLoaded == true
-                ) {
-                    return true
-                } else {
-                    hFacebookManger?.hLoadFbInterstitial()
-                }
-            }
-            else -> Unit
+    fun zShowFBInterstitialWithOutCallBacks(
+        activity: Activity,
+        adsId: String,
+        trueAdCallBackInterface: TrueAdCallBackInterface,
+    ) {
+        if (TrueConstants.isNetworkSpeedHigh()) {
+            if (hFacebookManger?.hGetFbInterstitialAd() != null &&
+                hFacebookManger?.hGetFbInterstitialAd()?.isAdLoaded == true
+            ) {
+                hFacebookManger?.hGetFbInterstitialAd()?.show()
+                return
+            } else
+                hFacebookManger?.zLoadInterstitialAdWithCallBacks(
+                    activity,
+                    adsId,
+                    trueAdCallBackInterface
+                )
         }
-        return false
-    }*/
+    }
+
+/*fun hIsInterstitialAvailable(activity: Activity): Boolean {
+    val hPriorityType: TrueAdPriorityType =
+        hInterstitialPriorityType
+    when (hPriorityType) {
+        H_AD_MOB -> {
+            if (hAdMobManager?.hInterstitialAd != null) {
+                return true
+            } else {
+                hAdMobManager?.hLoadInterstitialAd(context,
+                    "ca-app-pub-3940256099942544/1033173712")
+            }
+        }
+        H_FACE_BOOK -> {
+
+            if (hFacebookManger?.hGetFbInterstitialAd() != null &&
+                hFacebookManger!!.hGetFbInterstitialAd()?.isAdLoaded == true
+            ) {
+                return true
+            } else {
+                hFacebookManger?.hLoadFbInterstitial()
+            }
+        }
+        else -> Unit
+    }
+    return false
+}*/
 
     private fun zGetInterFallBackPriority(zAdsType: TrueAdsType): TrueAdPriorityType {
         return when (zInterstitialPriorityType) {

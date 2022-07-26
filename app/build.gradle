@@ -17,9 +17,17 @@ android {
     }
 
     buildTypes {
+        deubg{
+            resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#418698876951921_418702163618259")
+            resValue ("string", "fb_Native_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
+            resValue ("string", "fb_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
+            resValue ("string", "fb_Native_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
+            resValue ("string", "fb_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
         }
     }
     compileOptions {
@@ -45,5 +53,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     /**Admob Library*/
     implementation 'com.google.android.gms:play-services-ads:21.1.0'
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
 
 }

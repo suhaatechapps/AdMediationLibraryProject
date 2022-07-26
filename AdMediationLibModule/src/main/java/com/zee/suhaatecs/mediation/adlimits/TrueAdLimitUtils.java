@@ -11,6 +11,8 @@ public class TrueAdLimitUtils {
 
     public static String adUnitId;
     public static String adsType;
+    public static final String TAG = "TrueAdLimitUtils";
+
 
     public static boolean isBanned(Context context, String unitId, String adType) {
         adUnitId = unitId;
@@ -22,33 +24,36 @@ public class TrueAdLimitUtils {
         int clicksCount = TruePrefUtils.getInstance().init(context, unitId).getClicksCount();
         int impressionsCount = TruePrefUtils.getInstance().init(context, unitId).getImpressionsCount();
         long timeEndBan = TruePrefUtils.getInstance().init(context, unitId).getTimeEndBan();
-        Log.d("TrueAdLimitUtilsClass", "isBanned: " + unitId + " Click Limits : " + clicksLimit + " Impression Limit :" + impressionsLimit);
+        Log.d("TrueAdLimitUtils", "isBanned: " + unitId + " Click Limits : " + clicksLimit + " Impression Limit :" + impressionsLimit + " Ad Type: " + adType + "\n Click Limit Activated: " + limitActivated);
 
-        /**If Limit Activated*/
-        if (!limitActivated)
-            return false;
+        boolean banned = false;
 
         /**If ad deactivated*/
-        if (!adActivated)
-            return true;
+        if (!adActivated) {
+            banned = true;
+        }
+
+        /**If Limit Activated*/
+        if (!limitActivated) {
+            banned = true;
+        }
 
         /**If limit is 0 or not defined will show ads anyway*/
         if (clicksLimit == 0 || impressionsLimit == 0)
-            return false;
+            banned = true;
+
         /**If unit is banned from showing ad for a period of time*/
-        if (System.currentTimeMillis() < timeEndBan)
-            return true;
+        if (System.currentTimeMillis() < timeEndBan) {
+            banned = true;
+        }
 
-
-        boolean banned = false;
         if (clicksCount >= clicksLimit || impressionsCount >= impressionsLimit) {
+            Log.d("TrueAdLimitUtils", "Impression Count: " + impressionsCount);
             TruePrefUtils.getInstance().init(context, unitId).zResetClicksCounter();
             TruePrefUtils.getInstance().init(context, unitId).zResetImpressionsCounter();
             TruePrefUtils.getInstance().init(context, unitId).zUpdateBanTime();
             banned = true;
         }
         return banned;
-
     }
-
 }

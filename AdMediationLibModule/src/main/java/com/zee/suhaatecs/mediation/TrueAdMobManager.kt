@@ -150,7 +150,6 @@ class TrueAdMobManager(
                                                     .init(context, prefNameInter)
                                                     .zUpdateClicksCounter()
                                             }
-
                                         }
                                     TruePrefUtils.getInstance().init(context, prefNameInter)
                                         .zUpdateImpressionCounter()
@@ -191,7 +190,6 @@ class TrueAdMobManager(
         }
     }
 
-
     @SuppressLint("BinaryOperationInTimber")
     fun zLoadInterstitialAdWithCallBacks(
         context: Activity,
@@ -211,7 +209,7 @@ class TrueAdMobManager(
                 val adRequest = AdRequest.Builder().build()
                 Handler(Looper.getMainLooper()).postDelayed(
                     {
-                        TrueZSPRepository.setAdAvailableValue(context, true)
+                        TrueZSPRepository. setAdAvailableValue(context, true)
                         InterstitialAd.load(
                             zContext!!,
                             interId,
@@ -270,7 +268,6 @@ class TrueAdMobManager(
                                                     true
                                                 )
                                             }
-
                                         }
                                     TruePrefUtils.getInstance().init(context, prefNameInter)
                                         .zUpdateImpressionCounter()
@@ -291,6 +288,7 @@ class TrueAdMobManager(
                                             zDomain = loadAdError.domain,
                                         )
                                     )
+                                    TrueZSPRepository.setAdMobAvailable(context, true)
                                     TrueZSPRepository.setAdAvailableValue(context, false)
                                     dialog.dismiss()
                                     zCallBackCalled = true
@@ -304,6 +302,7 @@ class TrueAdMobManager(
                     TruePrefUtils.getInstance().init(context, prefNameInter).delayMs
                 )
             } else {
+                TrueZSPRepository.setAdMobAvailable(context, true)
                 trueAdCallBackInterface.onShowAdComplete()
                 TrueZSPRepository.setAdAvailableValue(context, false)
                 Timber.tag("AdmobInter").d(

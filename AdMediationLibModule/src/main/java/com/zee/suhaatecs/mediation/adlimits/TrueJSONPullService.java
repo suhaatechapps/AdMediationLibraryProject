@@ -120,6 +120,9 @@ public class TrueJSONPullService extends IntentService {
                 if (unitId.contains("/")) {
                     unitId = unitId.substring(unitId.lastIndexOf("/") + 1);
                 }
+                else if (unitId.contains("_")) {
+                    unitId = unitId.substring(unitId.lastIndexOf("_") + 1);
+                }
                 TruePrefUtils.getInstance().init(getApplicationContext(), unitId).zUpdateUnitsData(limitActivated, adActivated, clicks, impressions, delayMs, banHours, hideOnClick);
             }
 
