@@ -148,134 +148,122 @@ class FaceBookAdManager(private var context: Context) {
         }
     }
 
-    fun zLoadInterstitialAdWithCallBacks(
+    fun zLoadFBInterstitialAdWithCallBacks(
         context: Activity,
         interId: String,
         trueAdCallBackInterface: TrueAdCallBackInterface
     ) {
         dialog = Dialog(context)
         loadAds(context)
-        if (interId.contains("/")) {
-            prefNameInter = interId.substring(interId.lastIndexOf("/") + 1)
+        if (interId.contains("_")) {
+            prefNameInter = interId.substring(interId.lastIndexOf("_") + 1)
         }
         CoroutineScope(Dispatchers.Main).launch {
-            if (zFbInterstitialAd != null) {
-                zFbInterstitialAd?.destroy()
-                zFbInterstitialAd = null
-            }
-            dialog = Dialog(context)
-            loadAds(context)
-            Log.d(TAG, "Ads Id: " + interId)
-            if (interId.contains("_")) {
-                prefNameInter = interId.substring(interId.lastIndexOf("_") + 1)
-            }
-            Log.d(TAG, "Prefer Name Inter: " + prefNameInter)
-            CoroutineScope(Dispatchers.Main).launch {
-                var zCallBackCalled = false
-                if (!TrueAdLimitUtils.isBanned(context, prefNameInter, "Interstitial Ad")) {
-                    dialog.show()
-                    /** it will be executed when its true*/
-                    Handler(Looper.getMainLooper()).postDelayed(
-                        {
-                            object : InterstitialAdExtendedListener {
-                                override fun onInterstitialActivityDestroyed() {}
+            var zCallBackCalled = false
+            if (!TrueAdLimitUtils.isBanned(context, prefNameInter, "Interstitial Ad")) {
+                dialog.show()
+                /** it will be executed when its true*/
+                Handler(Looper.getMainLooper()).postDelayed(
+                    {
+                        object : InterstitialAdExtendedListener {
+                            override fun onInterstitialActivityDestroyed() {}
 
-                                override fun onInterstitialDisplayed(ad: Ad?) {
-                                    zInterCallbacks?.zOnAddShowed(TrueAdsType.Z_FACEBOOK)
-                                    Log.d(TAG, "onInterstitialDisplayed: " + ad)
-                                    TrueZSPRepository.setFBAdAvailableValue(
-                                        context,
-                                        true
-                                    )
-                                }
-
-                                override fun onInterstitialDismissed(ad: Ad?) {
-                                    zInterCallbacks?.zOnAddDismissed(TrueAdsType.Z_FACEBOOK)
-                                    trueAdCallBackInterface.onShowAdComplete()
-                                    TrueZSPRepository.setFBAdAvailableValue(
-                                        context,
-                                        true
-                                    )
-                                    Log.d(TAG, "onInterstitialDismissed: " + ad)
-                                }
-
-                                override fun onError(ad: Ad?, adError: AdError?) {
-                                    TrueZSPRepository.setFBAdAvailableValue(
-                                        context,
-                                        false
-                                    )
-                                    zInterCallbacks?.zOnAdFailedToLoad(
-                                        TrueAdsType.Z_FACEBOOK,
-                                        zError = TrueError(
-                                            zMessage = adError?.errorMessage,
-                                            zCode = adError?.errorCode,
-                                        ),
-                                    )
-                                    Toast.makeText(
-                                        context,
-                                        "Error: " + adError!!.errorMessage,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    Log.d(TAG, "onError: " + adError!!.errorMessage)
-                                }
-
-                                override fun onAdLoaded(ad: Ad?) {
-                                    TrueZSPRepository.setFBAdAvailableValue(context, true)
-                                    dialog.dismiss()
-                                    zInterCallbacks?.zOnAddLoaded(TrueAdsType.Z_FACEBOOK)
-                                    TruePrefUtils.getInstance().init(context, prefNameInter)
-                                        .zUpdateImpressionCounter()
-                                    zInterCallbacks?.zOnAddLoaded(zAdType = TrueAdsType.Z_ADMOB)
-                                    zCallBackCalled = true
-                                    zFbInterstitialAd!!.show()
-                                    Log.d(TAG, "onAdLoaded: " + ad)
-                                }
-
-                                override fun onAdClicked(ad: Ad?) {
-                                    Log.d(TAG, "onAdClicked: " + ad)
-                                    TruePrefUtils.getInstance()
-                                        .init(context, prefNameInter)
-                                        .zUpdateClicksCounter()
-                                    Log.d(
-                                        TAG,
-                                        "Click Counter : " + TruePrefUtils.getInstance().clicksCount
-                                    )
-                                }
-
-                                override fun onLoggingImpression(ad: Ad?) {
-                                    Log.d(TAG, "onLoggingImpression: " + ad)
-                                }
-
-                                override fun onRewardedAdCompleted() {}
-                                override fun onRewardedAdServerSucceeded() {}
-                                override fun onRewardedAdServerFailed() {}
-                            }.also { listener ->
-                                zFbInterstitialAd = InterstitialAd(
+                            override fun onInterstitialDisplayed(ad: Ad?) {
+                                zInterCallbacks?.zOnAddShowed(TrueAdsType.Z_FACEBOOK)
+                                Log.d(TAG, "onInterstitialDisplayed: " + ad)
+                                TrueZSPRepository.setFBAdAvailableValue(
                                     context,
-                                    interId
+                                    true
                                 )
-                                val loadAdConfig = zFbInterstitialAd!!
-                                    .buildLoadAdConfig()
-                                    .withAdListener(listener)
-                                    .build()
-                                zFbInterstitialAd!!.loadAd(loadAdConfig)
                             }
-                        }, TruePrefUtils.getInstance().init(context, prefNameInter).delayMs
+
+                            override fun onInterstitialDismissed(ad: Ad?) {
+                                zInterCallbacks?.zOnAddDismissed(TrueAdsType.Z_FACEBOOK)
+                                trueAdCallBackInterface.onShowAdComplete()
+                                TrueZSPRepository.setFBAdAvailableValue(
+                                    context,
+                                    true
+                                )
+                                Log.d(TAG, "onInterstitialDismissed: " + ad)
+                            }
+
+                            override fun onError(ad: Ad?, adError: AdError?) {
+                                TrueZSPRepository.setFBAdAvailableValue(
+                                    context,
+                                    false
+                                )
+                                zInterCallbacks?.zOnAdFailedToLoad(
+                                    TrueAdsType.Z_FACEBOOK,
+                                    zError = TrueError(
+                                        zMessage = adError?.errorMessage,
+                                        zCode = adError?.errorCode,
+                                    ),
+                                )
+                                Toast.makeText(
+                                    context,
+                                    "Error: " + adError!!.errorMessage,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                Log.d(TAG, "onError: " + adError!!.errorMessage)
+                            }
+
+                            override fun onAdLoaded(ad: Ad?) {
+                                TrueZSPRepository.setFBAdAvailableValue(context, true)
+                                dialog.dismiss()
+                                zInterCallbacks?.zOnAddLoaded(TrueAdsType.Z_FACEBOOK)
+                                TruePrefUtils.getInstance().init(context, prefNameInter)
+                                    .zUpdateImpressionCounter()
+                                zInterCallbacks?.zOnAddLoaded(zAdType = TrueAdsType.Z_ADMOB)
+                                zCallBackCalled = true
+                                zFbInterstitialAd!!.show()
+                                Log.d(TAG, "onAdLoaded: " + ad)
+                            }
+
+                            override fun onAdClicked(ad: Ad?) {
+                                Log.d(TAG, "onAdClicked: " + ad)
+                                TruePrefUtils.getInstance()
+                                    .init(context, prefNameInter)
+                                    .zUpdateClicksCounter()
+                                Log.d(
+                                    TAG,
+                                    "Click Counter : " + TruePrefUtils.getInstance().clicksCount
+                                )
+                            }
+
+                            override fun onLoggingImpression(ad: Ad?) {
+                                Log.d(TAG, "onLoggingImpression: " + ad)
+                            }
+
+                            override fun onRewardedAdCompleted() {}
+                            override fun onRewardedAdServerSucceeded() {}
+                            override fun onRewardedAdServerFailed() {}
+                        }.also { listener ->
+                            zFbInterstitialAd = InterstitialAd(
+                                context,
+                                interId
+                            )
+                            val loadAdConfig = zFbInterstitialAd!!
+                                .buildLoadAdConfig()
+                                .withAdListener(listener)
+                                .build()
+                            zFbInterstitialAd!!.loadAd(loadAdConfig)
+                        }
+                    }, TruePrefUtils.getInstance().init(context, prefNameInter).delayMs
+                )
+            } else {
+                trueAdCallBackInterface.onShowAdComplete()
+                TrueZSPRepository.setFBAdAvailableValue(context, false)
+                Log.d(
+                    TAG, "loadFbInterstitialAds: " +
+                            "Inter Ad Is Banned : " + !TrueAdLimitUtils.isBanned(
+                        context,
+                        prefNameInter,
+                        "Interstitial Ad"
                     )
-                } else {
-                    trueAdCallBackInterface.onShowAdComplete()
-                    TrueZSPRepository.setFBAdAvailableValue(context, false)
-                    Log.d(
-                        TAG, "loadFbInterstitialAds: " +
-                                "Inter Ad Is Banned : " + !TrueAdLimitUtils.isBanned(
-                            context,
-                            prefNameInter,
-                            "Interstitial Ad"
-                        )
-                    )
-                }
+                )
             }
         }
+
     }
 
     /**Load Ads Dialogue*/
