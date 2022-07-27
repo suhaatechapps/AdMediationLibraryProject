@@ -17,18 +17,9 @@ android {
     }
 
     buildTypes {
-       /* deubg{
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
-            resValue ("string", "fb_Native_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
-            resValue ("string", "fb_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
-        }*/
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            /*resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
-            resValue ("string", "fb_Native_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
-            resValue ("string", "fb_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")*/
         }
     }
     compileOptions {

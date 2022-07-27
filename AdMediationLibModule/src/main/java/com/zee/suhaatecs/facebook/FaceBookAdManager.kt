@@ -36,7 +36,7 @@ class FaceBookAdManager(private var context: Context) {
     private var zInterCallbacks: TrueInterCallbacks? = null
     private var hAdCallbacks: TrueAdCallbacks? = null
     lateinit var dialog: Dialog
-    private var prefNameInter: String? = null
+    private var prefNameFBInter: String? = null
 
     fun hGetFbInterstitialAd(): InterstitialAd? {
         return zFbInterstitialAd
@@ -54,12 +54,12 @@ class FaceBookAdManager(private var context: Context) {
         loadAds(context)
         Log.d(TAG, "Ads Id: " + interId)
         if (interId.contains("_")) {
-            prefNameInter = interId.substring(interId.lastIndexOf("_") + 1)
+            prefNameFBInter = interId.substring(interId.lastIndexOf("_") + 1)
         }
-        Log.d(TAG, "Prefer Name Inter: " + prefNameInter)
+        Log.d(TAG, "Prefer Name Inter: " + prefNameFBInter)
         CoroutineScope(Dispatchers.Main).launch {
             var zCallBackCalled = false
-            if (!TrueAdLimitUtils.isBanned(context, prefNameInter, "Interstitial Ad")) {
+            if (!TrueAdLimitUtils.isBanned(context, prefNameFBInter, "Interstitial Ad")) {
                 dialog.show()
                 /** it will be executed when its true*/
                 Handler(Looper.getMainLooper()).postDelayed(
@@ -96,7 +96,7 @@ class FaceBookAdManager(private var context: Context) {
                             override fun onAdLoaded(ad: Ad?) {
                                 dialog.dismiss()
                                 zInterCallbacks?.zOnAddLoaded(TrueAdsType.Z_FACEBOOK)
-                                TruePrefUtils.getInstance().init(context, prefNameInter)
+                                TruePrefUtils.getInstance().init(context, prefNameFBInter)
                                     .zUpdateImpressionCounter()
                                 zInterCallbacks?.zOnAddLoaded(zAdType = TrueAdsType.Z_ADMOB)
                                 zCallBackCalled = true
@@ -107,7 +107,7 @@ class FaceBookAdManager(private var context: Context) {
                             override fun onAdClicked(ad: Ad?) {
                                 Log.d(TAG, "onAdClicked: " + ad)
                                 TruePrefUtils.getInstance()
-                                    .init(context, prefNameInter)
+                                    .init(context, prefNameFBInter)
                                     .zUpdateClicksCounter()
                                 Log.d(
                                     TAG,
@@ -133,14 +133,14 @@ class FaceBookAdManager(private var context: Context) {
                                 .build()
                             zFbInterstitialAd!!.loadAd(loadAdConfig)
                         }
-                    }, TruePrefUtils.getInstance().init(context, prefNameInter).delayMs
+                    }, TruePrefUtils.getInstance().init(context, prefNameFBInter).delayMs
                 )
             } else {
                 Log.d(
                     TAG, "loadFbInterstitialAds: " +
                             "Inter Ad Is Banned : " + !TrueAdLimitUtils.isBanned(
                         context,
-                        prefNameInter,
+                        prefNameFBInter,
                         "Interstitial Ad"
                     )
                 )
@@ -156,11 +156,11 @@ class FaceBookAdManager(private var context: Context) {
         dialog = Dialog(context)
         loadAds(context)
         if (interId.contains("_")) {
-            prefNameInter = interId.substring(interId.lastIndexOf("_") + 1)
+            prefNameFBInter = interId.substring(interId.lastIndexOf("_") + 1)
         }
         CoroutineScope(Dispatchers.Main).launch {
             var zCallBackCalled = false
-            if (!TrueAdLimitUtils.isBanned(context, prefNameInter, "Interstitial Ad")) {
+            if (!TrueAdLimitUtils.isBanned(context, prefNameFBInter, "Interstitial Ad")) {
                 dialog.show()
                 /** it will be executed when its true*/
                 Handler(Looper.getMainLooper()).postDelayed(
@@ -211,7 +211,7 @@ class FaceBookAdManager(private var context: Context) {
                                 TrueZSPRepository.setFBAdAvailableValue(context, true)
                                 dialog.dismiss()
                                 zInterCallbacks?.zOnAddLoaded(TrueAdsType.Z_FACEBOOK)
-                                TruePrefUtils.getInstance().init(context, prefNameInter)
+                                TruePrefUtils.getInstance().init(context, prefNameFBInter)
                                     .zUpdateImpressionCounter()
                                 zInterCallbacks?.zOnAddLoaded(zAdType = TrueAdsType.Z_ADMOB)
                                 zCallBackCalled = true
@@ -222,7 +222,7 @@ class FaceBookAdManager(private var context: Context) {
                             override fun onAdClicked(ad: Ad?) {
                                 Log.d(TAG, "onAdClicked: " + ad)
                                 TruePrefUtils.getInstance()
-                                    .init(context, prefNameInter)
+                                    .init(context, prefNameFBInter)
                                     .zUpdateClicksCounter()
                                 Log.d(
                                     TAG,
@@ -248,7 +248,7 @@ class FaceBookAdManager(private var context: Context) {
                                 .build()
                             zFbInterstitialAd!!.loadAd(loadAdConfig)
                         }
-                    }, TruePrefUtils.getInstance().init(context, prefNameInter).delayMs
+                    }, TruePrefUtils.getInstance().init(context, prefNameFBInter).delayMs
                 )
             } else {
                 trueAdCallBackInterface.onShowAdComplete()
@@ -257,7 +257,7 @@ class FaceBookAdManager(private var context: Context) {
                     TAG, "loadFbInterstitialAds: " +
                             "Inter Ad Is Banned : " + !TrueAdLimitUtils.isBanned(
                         context,
-                        prefNameInter,
+                        prefNameFBInter,
                         "Interstitial Ad"
                     )
                 )
