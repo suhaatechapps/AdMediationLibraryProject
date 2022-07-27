@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         deubg{
-            resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#418698876951921_418702163618259")
+            resValue ("string", "fb_InterstitialId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
             resValue ("string", "fb_Native_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
             resValue ("string", "fb_BannerId", "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID")
         }
@@ -55,4 +55,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:21.1.0'
     /**FaceBook Adapters Library*/
     implementation 'com.applovin.mediation:facebook-adapter:6.6.0.3'
+    /**FaceBook Adapters Library*/
+    implementation 'com.applovin.mediation:facebook-adapter:6.6.0.3'
+    implementation 'com.facebook.android:audience-network-sdk:6.8.0'
 }
