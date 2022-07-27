@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
@@ -209,7 +210,7 @@ class TrueAdMobManager(
                 val adRequest = AdRequest.Builder().build()
                 Handler(Looper.getMainLooper()).postDelayed(
                     {
-                        TrueZSPRepository. setAdAvailableValue(context, true)
+                        TrueZSPRepository.setAdAvailableValue(context, true)
                         InterstitialAd.load(
                             zContext!!,
                             interId,
@@ -221,6 +222,11 @@ class TrueAdMobManager(
                                     interstitialAd.fullScreenContentCallback =
                                         object : FullScreenContentCallback() {
                                             override fun onAdDismissedFullScreenContent() {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ad Dismissed: ",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                                 TrueZSPRepository.setAdAvailableValue(
                                                     context,
                                                     true
@@ -233,6 +239,11 @@ class TrueAdMobManager(
                                             override fun onAdFailedToShowFullScreenContent(
                                                 adError: AdError
                                             ) {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ad Failed To Show Full Screen Content: ",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                                 TrueZSPRepository.setAdAvailableValue(
                                                     context,
                                                     true
@@ -249,6 +260,11 @@ class TrueAdMobManager(
                                             }
 
                                             override fun onAdShowedFullScreenContent() {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ad Show Full Screen Content: ",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                                 zInterCallbacks?.zOnAddShowed(TrueAdsType.Z_ADMOB)
                                                 zCallBackCalled = true
                                                 zInterstitialAd = null
@@ -259,6 +275,11 @@ class TrueAdMobManager(
                                             }
 
                                             override fun onAdClicked() {
+                                                Toast.makeText(
+                                                    context,
+                                                    "Ad Clicked: ",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                                 super.onAdClicked()
                                                 TruePrefUtils.getInstance()
                                                     .init(context, prefNameInter)
@@ -280,6 +301,11 @@ class TrueAdMobManager(
                                 }
 
                                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                                    Toast.makeText(
+                                        context,
+                                        "Error: " + loadAdError.message,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     zInterCallbacks?.zOnAdFailedToLoad(
                                         zAdType = TrueAdsType.Z_ADMOB,
                                         zError = TrueError(
