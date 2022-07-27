@@ -178,6 +178,7 @@ class FaceBookAdManager(private var context: Context) {
                             }
 
                             override fun onInterstitialDismissed(ad: Ad?) {
+
                                 zInterCallbacks?.zOnAddDismissed(TrueAdsType.Z_FACEBOOK)
                                 trueAdCallBackInterface.onShowAdComplete()
                                 TrueZSPRepository.setFBAdAvailableValue(
@@ -199,6 +200,7 @@ class FaceBookAdManager(private var context: Context) {
                                         zCode = adError?.errorCode,
                                     ),
                                 )
+                                dialog.dismiss()
                                 Toast.makeText(
                                     context,
                                     "Error: " + adError!!.errorMessage,
