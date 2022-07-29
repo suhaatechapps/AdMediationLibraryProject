@@ -222,11 +222,6 @@ class TrueAdMobManager(
                                     interstitialAd.fullScreenContentCallback =
                                         object : FullScreenContentCallback() {
                                             override fun onAdDismissedFullScreenContent() {
-                                                Toast.makeText(
-                                                    context,
-                                                    "Ad Dismissed: ",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                                 TrueZSPRepository.setAdAvailableValue(
                                                     context,
                                                     true
@@ -239,15 +234,11 @@ class TrueAdMobManager(
                                             override fun onAdFailedToShowFullScreenContent(
                                                 adError: AdError
                                             ) {
-                                                Toast.makeText(
-                                                    context,
-                                                    "Ad Failed To Show Full Screen Content: ",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                                 TrueZSPRepository.setAdAvailableValue(
                                                     context,
                                                     true
                                                 )
+                                                trueAdCallBackInterface.onShowAdComplete()
                                                 zInterCallbacks?.zOnAdFailedToShowFullContent(
                                                     zAdType = TrueAdsType.Z_ADMOB,
                                                     zError = TrueError(
@@ -260,11 +251,6 @@ class TrueAdMobManager(
                                             }
 
                                             override fun onAdShowedFullScreenContent() {
-                                                Toast.makeText(
-                                                    context,
-                                                    "Ad Show Full Screen Content: ",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                                 zInterCallbacks?.zOnAddShowed(TrueAdsType.Z_ADMOB)
                                                 zCallBackCalled = true
                                                 zInterstitialAd = null
@@ -275,11 +261,6 @@ class TrueAdMobManager(
                                             }
 
                                             override fun onAdClicked() {
-                                                Toast.makeText(
-                                                    context,
-                                                    "Ad Clicked: ",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
                                                 super.onAdClicked()
                                                 TruePrefUtils.getInstance()
                                                     .init(context, prefNameInter)
@@ -296,7 +277,6 @@ class TrueAdMobManager(
                                     zCallBackCalled = true
                                     interstitialAd.show(context)
                                     Handler(Looper.getMainLooper()).postDelayed({
-                                        trueAdCallBackInterface.onShowAdComplete()
                                         dialog.dismiss()
                                     }, 500)
                                 }
