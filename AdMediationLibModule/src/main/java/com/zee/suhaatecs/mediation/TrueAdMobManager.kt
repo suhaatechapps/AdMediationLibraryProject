@@ -296,16 +296,13 @@ class TrueAdMobManager(
                                     zCallBackCalled = true
                                     interstitialAd.show(context)
                                     Handler(Looper.getMainLooper()).postDelayed({
+                                        trueAdCallBackInterface.onShowAdComplete()
                                         dialog.dismiss()
-                                    }, 1000)
+                                    }, 500)
                                 }
 
                                 override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                                    Toast.makeText(
-                                        context,
-                                        "Error: " + loadAdError.message,
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    trueAdCallBackInterface.onShowAdComplete()
                                     zInterCallbacks?.zOnAdFailedToLoad(
                                         zAdType = TrueAdsType.Z_ADMOB,
                                         zError = TrueError(
