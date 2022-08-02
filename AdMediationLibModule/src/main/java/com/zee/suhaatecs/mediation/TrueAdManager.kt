@@ -178,6 +178,29 @@ object TrueAdManager : TrueAdCallBackInterface {
         }
     }
 
+    /**Load Interstitial Ad In Advance*/
+    fun zLoadInterstitialInAdvance(
+        context: Activity,
+        adId: String
+    ) {
+        if (TrueConstants.isNetworkSpeedHigh()) {
+            zAdMobManager?.zLoadInterstitialInAdvance(
+                context, adId
+            )
+        }
+    }
+
+    /**Show Interstitial Ad In Advance*/
+    fun zShowInterstitialInAdvance(
+        context: Activity
+    ) {
+        if (TrueConstants.isNetworkSpeedHigh()) {
+            zAdMobManager?.zShowInterstitialAdInAdvance(
+                context
+            )
+        }
+    }
+
 /*fun hIsInterstitialAvailable(activity: Activity): Boolean {
     val hPriorityType: TrueAdPriorityType =
         hInterstitialPriorityType
@@ -445,27 +468,6 @@ object TrueAdManager : TrueAdCallBackInterface {
             }
         } else {
             bannerAdContainer.visibility = View.GONE
-        }
-    }
-
-    /**Load Interstitial Ad In Advance*/
-    fun zLoadInterstitialInAdvance(
-        context: Activity,
-        adId: String,
-    ) {
-        if (TrueConstants.isNetworkSpeedHigh()) {
-            zAdMobManager?.zLoadInterstitialInAdvance(
-                context, adId
-            )
-        }
-    }
-
-    /**Show Interstitial Ad In Advance*/
-    fun zShowInterstitialInAdvance(context: Activity) {
-        if (TrueConstants.isNetworkSpeedHigh()) {
-            zAdMobManager?.zShowInterstitialAdInAdvance(
-                context
-            )
         }
     }
 

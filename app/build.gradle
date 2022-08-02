@@ -45,10 +45,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     /**Admob Library*/
     implementation 'com.google.android.gms:play-services-ads:21.1.0'
+
     /**FaceBook Adapters Library*/
-    implementation 'com.applovin.mediation:facebook-adapter:6.6.0.3'
-    /**FaceBook Adapters Library*/
-    implementation 'com.applovin.mediation:facebook-adapter:6.6.0.3'
-    implementation 'com.facebook.android:audience-network-sdk:6.11.0'
     implementation("com.google.ads.mediation:facebook:6.11.0.0")
+    implementation 'com.facebook.android:audience-network-sdk:6.11.0'
+    implementation 'com.applovin.mediation:facebook-adapter:6.6.0.3'
+    /*implementation 'com.google.android.ads:mediation-test-suite:3.0.0'*/
 }

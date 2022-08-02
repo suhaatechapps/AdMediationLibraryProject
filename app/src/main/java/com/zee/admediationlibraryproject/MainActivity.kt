@@ -24,14 +24,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         zAdMobManager = TrueAdMobManager(this)
         binding.showAds.setOnClickListener {
-            TrueAdManager.zShowFbInterstitial(this, "IMG_16_9_APP_INSTALL#418698876951921_418702163618259")
+            TrueAdManager.zShowFbInterstitial(
+                this,
+                "IMG_16_9_APP_INSTALL#418698876951921_418702163618259"
+            )
         }
 
-
-        TrueAdManager.zLoadInterstitialInAdvance(
-            this,
-            "ca-app-pub-3940256099942544/1033173712"
-        )
+        TrueAdManager.zLoadInterstitialInAdvance(this, "ca-app-pub-3940256099942544/1033173712")
 
         TrueAdManager.zLoadSimpleNativeAdInAdvance(
             this,

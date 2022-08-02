@@ -25,89 +25,97 @@ class SplashScreenActivity : AppCompatActivity() {
             binding.splashProgress.visibility = View.GONE
             binding.splashStartBtn.visibility = View.VISIBLE
         }, 4000)
+        TrueAdManager.zLoadInterstitialInAdvance(this, "ca-app-pub-3940256099942544/1033173712")
         binding.splashStartBtn.setOnClickListener {
-            if (!TrueZSPRepository.getIfAdmobAvailable(this@SplashScreenActivity)) {
-                if (TrueConstants.isNetworkAvailable(this) && TrueConstants.isNetworkSpeedHigh()) {
-                    binding.splashProgress.visibility = View.GONE
-                    TrueAdManager.zShowInterstitialWithOutCallBacks(
-                        this,
-                        "ca-app-pub-3940256099942544/1033173712",
-                        object : TrueAdCallBackInterface {
-                            override fun onShowAdComplete() {
-                                if (TrueZSPRepository.getIfAdAvailable(this@SplashScreenActivity)) {
-                                    Toast.makeText(
-                                        this@SplashScreenActivity,
-                                        "Value Is 1 : " + TrueZSPRepository.getIfAdmobAvailable(this@SplashScreenActivity),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    startActivity(
-                                        Intent(
-                                            this@SplashScreenActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
-                                } else {
-                                    Toast.makeText(
-                                        this@SplashScreenActivity,
-                                        "Value Is 2  : " + TrueZSPRepository.getIfAdmobAvailable(this@SplashScreenActivity),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    startActivity(
-                                        Intent(
-                                            this@SplashScreenActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
-                                }
-                            }
-                        })
-                } else {
-                    startActivity(
-                        Intent(
-                            this@SplashScreenActivity,
-                            MainActivity::class.java
-                        )
-                    )
-                }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Value Is: 3" + TrueZSPRepository.getIfAdmobAvailable(this),
-                    Toast.LENGTH_SHORT
-                ).show()
-                if (TrueConstants.isNetworkAvailable(this) && TrueConstants.isNetworkSpeedHigh()) {
-                    binding.splashProgress.visibility = View.GONE
-                    TrueAdManager.zShowFBInterstitialWithOutCallBacks(
-                        this,
-                        "IMG_16_9_APP_INSTALL#418698876951921_418702163618259",
-                        object : TrueAdCallBackInterface {
-                            override fun onShowAdComplete() {
-                                if (TrueZSPRepository.getIfFBAdAvailable(this@SplashScreenActivity)) {
-                                    startActivity(
-                                        Intent(
-                                            this@SplashScreenActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
-                                } else {
-                                    startActivity(
-                                        Intent(
-                                            this@SplashScreenActivity,
-                                            MainActivity::class.java
-                                        )
-                                    )
-                                }
-                            }
-                        })
-                } else {
-                    startActivity(
-                        Intent(
-                            this@SplashScreenActivity,
-                            MainActivity::class.java
-                        )
-                    )
-                }
+            if (TrueConstants.isNetworkAvailable(this@SplashScreenActivity) && TrueConstants.isNetworkSpeedHigh()) {
+                TrueAdManager.zShowInterstitialInAdvance(this);
             }
         }
     }
+    /* binding.splashStartBtn.setOnClickListener {
+         if (!TrueZSPRepository.getIfAdmobAvailable(this@SplashScreenActivity)) {
+             if (TrueConstants.isNetworkAvailable(this) && TrueConstants.isNetworkSpeedHigh()) {
+                 binding.splashProgress.visibility = View.GONE
+                 TrueAdManager.zShowInterstitialWithOutCallBacks(
+                     this,
+                     "ca-app-pub-3940256099942544/1033173712",
+                     object : TrueAdCallBackInterface {
+                         override fun onShowAdComplete() {
+                             if (TrueZSPRepository.getIfAdAvailable(this@SplashScreenActivity)) {
+                                 Toast.makeText(
+                                     this@SplashScreenActivity,
+                                     "Value Is 1 : " + TrueZSPRepository.getIfAdmobAvailable(this@SplashScreenActivity),
+                                     Toast.LENGTH_SHORT
+                                 ).show()
+                                 startActivity(
+                                     Intent(
+                                         this@SplashScreenActivity,
+                                         MainActivity::class.java
+                                     )
+                                 )
+                             } else {
+                                 Toast.makeText(
+                                     this@SplashScreenActivity,
+                                     "Value Is 2  : " + TrueZSPRepository.getIfAdmobAvailable(
+                                         this@SplashScreenActivity
+                                     ),
+                                     Toast.LENGTH_SHORT
+                                 ).show()
+                                 startActivity(
+                                     Intent(
+                                         this@SplashScreenActivity,
+                                         MainActivity::class.java
+                                     )
+                                 )
+                             }
+                         }
+                     })
+             } else {
+                 startActivity(
+                     Intent(
+                         this@SplashScreenActivity,
+                         MainActivity::class.java
+                     )
+                 )
+             }
+         } else {
+             Toast.makeText(
+                 this,
+                 "Value Is: 3" + TrueZSPRepository.getIfAdmobAvailable(this),
+                 Toast.LENGTH_SHORT
+             ).show()
+             if (TrueConstants.isNetworkAvailable(this) && TrueConstants.isNetworkSpeedHigh()) {
+                 binding.splashProgress.visibility = View.GONE
+                 TrueAdManager.zShowFBInterstitialWithOutCallBacks(
+                     this,
+                     "IMG_16_9_APP_INSTALL#418698876951921_418702163618259",
+                     object : TrueAdCallBackInterface {
+                         override fun onShowAdComplete() {
+                             if (TrueZSPRepository.getIfFBAdAvailable(this@SplashScreenActivity)) {
+                                 startActivity(
+                                     Intent(
+                                         this@SplashScreenActivity,
+                                         MainActivity::class.java
+                                     )
+                                 )
+                             } else {
+                                 startActivity(
+                                     Intent(
+                                         this@SplashScreenActivity,
+                                         MainActivity::class.java
+                                     )
+                                 )
+                             }
+                         }
+                     })
+             } else {
+                 startActivity(
+                     Intent(
+                         this@SplashScreenActivity,
+                         MainActivity::class.java
+                     )
+                 )
+             }
+         }
+     }*/
 }

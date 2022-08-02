@@ -333,6 +333,7 @@ class TrueAdMobManager(
                 val adRequest = AdRequest.Builder().build()
                 Handler(Looper.getMainLooper()).postDelayed(
                     {
+                        TrueZSPRepository.setAdAvailableValue(context, false)
                         InterstitialAd.load(
                             zContext!!,
                             interId,
@@ -418,7 +419,9 @@ class TrueAdMobManager(
         }
     }
 
-    fun zShowInterstitialAdInAdvance(context: Activity) {
+    fun zShowInterstitialAdInAdvance(
+        context: Activity
+    ) {
         dialog = Dialog(context)
         loadAds(context)
         if (zInterstitialAdInAdvance == null) {
