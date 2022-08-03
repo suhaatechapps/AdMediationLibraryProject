@@ -446,7 +446,7 @@ class TrueAdMobManager(
                 } else {
                     true
                 }
-            }, 500)
+            }, 1000)
         }
     }
 
