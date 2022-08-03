@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources.NotFoundException
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -62,6 +63,7 @@ class TrueAdMobManager(
     private var nativeAdvanceBooleanValue = false
     var TAG = "TrueAdMobClass"
     lateinit var dialog: Dialog
+    lateinit var targetDestination: Class<*>
 
     @Suppress("DEPRECATION")
     companion object {
@@ -349,6 +351,12 @@ class TrueAdMobManager(
                                                 )
                                                 zCallBackCalled = true
                                                 TrueConstants.mShowInterstitialAds = false
+                                                context.startActivity(
+                                                    Intent(
+                                                        context,
+                                                        targetDestination
+                                                    )
+                                                )
                                             }
 
                                             override fun onAdFailedToShowFullScreenContent(
@@ -420,10 +428,12 @@ class TrueAdMobManager(
     }
 
     fun zShowInterstitialAdInAdvance(
-        context: Activity
+        context: Activity,
+        destination: Class<*>
     ) {
         dialog = Dialog(context)
         loadAds(context)
+        targetDestination = destination
         if (zInterstitialAdInAdvance == null) {
             dialog.dismiss()
         } else {

@@ -192,11 +192,12 @@ object TrueAdManager : TrueAdCallBackInterface {
 
     /**Show Interstitial Ad In Advance*/
     fun zShowInterstitialInAdvance(
-        context: Activity
+        context: Activity,
+        destination: Class<*>
     ) {
         if (TrueConstants.isNetworkSpeedHigh()) {
             zAdMobManager?.zShowInterstitialAdInAdvance(
-                context
+                context, destination
             )
         }
     }

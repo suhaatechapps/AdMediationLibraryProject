@@ -28,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
         TrueAdManager.zLoadInterstitialInAdvance(this, "ca-app-pub-3940256099942544/1033173712")
         binding.splashStartBtn.setOnClickListener {
             if (TrueConstants.isNetworkAvailable(this@SplashScreenActivity) && TrueConstants.isNetworkSpeedHigh()) {
-                TrueAdManager.zShowInterstitialInAdvance(this);
+                TrueAdManager.zShowInterstitialInAdvance(this, MainActivity::class.java);
             }
         }
     }
