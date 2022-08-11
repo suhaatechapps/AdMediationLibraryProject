@@ -5,9 +5,12 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.text.TextUtils
+import android.util.Log
 import com.zee.suhaatecs.BuildConfig
 import com.zee.suhaatecs.mediation.TrueAdManager.context
-import java.lang.Exception
+import java.lang.ref.WeakReference
+
 
 object TrueConstants {
     const val h2SecTimeOut = 2000L
@@ -15,6 +18,7 @@ object TrueConstants {
     const val h5SecTimeOut = 5000L
     const val h8SecTimeOut = 8000L
     final var mShowInterstitialAds = false
+    var TAG = "TrueConstantsClass"
     fun isInterstitialAdShow(context: Context): Boolean {
         return mShowInterstitialAds
     }
@@ -53,7 +57,8 @@ object TrueConstants {
         val nc = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cm.getNetworkCapabilities(cm.activeNetwork)
         } else {
-            TODO("VERSION.SDK_INT < M")
+            Log.d(TAG, "isNetworkSpeedHigh: ")
+            return true
         }
         try {
             val downSpeed = nc!!.linkDownstreamBandwidthKbps
@@ -84,4 +89,5 @@ object TrueConstants {
 
         }
     }
+
 }

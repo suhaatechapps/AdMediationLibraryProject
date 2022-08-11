@@ -38,6 +38,7 @@ object TrueZSPRepository {
         return getDefaultSharedPreferences(context).getBoolean(OPEN_APP_AD_KEY, false)
     }
 
+
     fun saveOpenAdValue(context: Context, openAdValue: Boolean) {
         getDefaultSharedPreferences(context).edit().putBoolean(
             OPEN_APP_AD_KEY, openAdValue
