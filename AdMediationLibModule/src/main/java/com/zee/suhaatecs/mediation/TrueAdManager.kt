@@ -191,7 +191,7 @@ object TrueAdManager : TrueAdCallBackInterface {
     }
 
     /**Show Interstitial Ad In Advance*/
-    fun zShowInterstitialInAdvanceWithOutIntent(
+    fun zShowInterstitialInAdvance(
         context: Activity,
         destination: Class<*>
     ) {
@@ -208,23 +208,23 @@ object TrueAdManager : TrueAdCallBackInterface {
         adId: String
     ) {
         if (TrueConstants.isNetworkSpeedHigh()) {
-            zAdMobManager?.zLoadInterstitialInAdvance(
+            zAdMobManager?.zLoadInterstitialInAdvanceWithOutIntent(
                 context, adId
             )
         }
     }
 
     /**Show Interstitial Ad In Advance*/
-    fun zShowInterstitialInAdvance(
-        context: Activity,
-        destination: Class<*>
+    fun zShowInterstitialInAdvanceWithOutIntent(
+        context: Activity
     ) {
         if (TrueConstants.isNetworkSpeedHigh()) {
-            zAdMobManager?.zShowInterstitialAdInAdvance(
-                context, destination
+            zAdMobManager?.zShowInterstitialAdInAdvanceWithOutIntent(
+                context
             )
         }
     }
+
 
 /*fun hIsInterstitialAvailable(activity: Activity): Boolean {
     val hPriorityType: TrueAdPriorityType =
